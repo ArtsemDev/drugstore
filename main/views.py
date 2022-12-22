@@ -1,6 +1,6 @@
 from django.views.generic import TemplateView, ListView
 
-from .models import Product
+from .models import Product, WorkSchedule
 
 
 class IndexTemplateView(TemplateView):
@@ -17,3 +17,9 @@ class ProductListView(ListView):
         objs = Product.objects.filter(is_published=True)
         objs = iter(objs)
         return list(zip_longest(objs, objs))
+
+
+class WorkScheduleListView(ListView):
+    template_name = 'main/store.html'
+    context_object_name = 'week'
+    model = WorkSchedule

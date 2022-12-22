@@ -52,11 +52,23 @@ class Product(models.Model):
         verbose_name_plural = 'товары'
 
 
+WEEK = (
+    ('mon', 'понедельник'),
+    ('tue', 'вторник'),
+    ('wed', 'среда'),
+    ('thu', 'четверг'),
+    ('fri', 'пятница'),
+    ('sat', 'суббота'),
+    ('sun', 'воскресенье'),
+)
+
+
 class WorkSchedule(models.Model):
     week_day = models.CharField(
         max_length=15,
         verbose_name='день недели',
-        unique=True
+        unique=True,
+        choices=WEEK
     )
     opening_time = models.TimeField(
         verbose_name='время открытия',

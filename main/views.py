@@ -2,6 +2,7 @@ from datetime import datetime
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView, ListView
+from django.utils.translation import gettext as _
 
 from .models import Product, WorkSchedule
 
@@ -12,6 +13,13 @@ class IndexTemplateView(TemplateView):
 
 class AboutTemplateView(TemplateView):
     template_name = 'main/about.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        a = 5
+        context['heading'] = _('О нас {a}').format(a=a)
+        context['subheading'] = _('Наш кофе')
+        return context
 
 
 class ProductListView(ListView):

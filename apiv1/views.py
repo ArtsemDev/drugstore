@@ -1,8 +1,7 @@
-from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet
 
-from .serializers import ProductSerializer, CategorySerializer
 from main.models import Product, Category
+from .serializers import ProductSerializer, CategorySerializer
 
 
 class ProductViewSet(ModelViewSet):

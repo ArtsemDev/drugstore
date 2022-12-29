@@ -1,9 +1,15 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import ModelSerializer, HyperlinkedModelSerializer
 
-from main.models import Product
+from main.models import Product, Category
 
 
-class ProductSerializer(ModelSerializer):
+class ProductSerializer(HyperlinkedModelSerializer):
     class Meta:
         model = Product
         fields = ('id', 'name', 'descr', 'image', 'category')
+
+
+class CategorySerializer(ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ('id', 'name')

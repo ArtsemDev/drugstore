@@ -1,10 +1,15 @@
 from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet
 
-from .serializers import ProductSerializer
-from main.models import Product
+from .serializers import ProductSerializer, CategorySerializer
+from main.models import Product, Category
 
 
 class ProductViewSet(ModelViewSet):
     queryset = Product.objects.filter(is_published=True)
     serializer_class = ProductSerializer
+
+
+class CategoryViewSet(ModelViewSet):
+    queryset = Category.objects.filter(is_published=True)
+    serializer_class = CategorySerializer

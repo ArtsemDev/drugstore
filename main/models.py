@@ -1,3 +1,4 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
@@ -90,3 +91,27 @@ class WorkSchedule(models.Model):
         db_table = 'main_work_schedule'
         verbose_name = 'график работы'
         verbose_name_plural = 'график работы'
+
+
+# class User(AbstractUser):
+#     role = models.ForeignKey('Role', on_delete=models.PROTECT)
+#
+#
+# class Role(models.Model):
+#     name = models.CharField(max_length=15)
+#
+#
+# class Question(models.Model):
+#     question = models.CharField(max_length=128)
+#     role = models.ForeignKey('Role', on_delete=models.PROTECT)
+#
+#
+# class QuestionAnswer(models.Model):
+#     answer = models.CharField(max_length=128)
+#     question = models.ForeignKey(Question, on_delete=models.PROTECT)
+#
+#
+# class UserAnswer(models.Model):
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
+#     question = models.ForeignKey(Question, on_delete=models.PROTECT)
+#     answer = models.ForeignKey(QuestionAnswer, on_delete=models.PROTECT)

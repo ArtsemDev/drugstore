@@ -7,10 +7,16 @@ from django.views import View
 from django.utils.translation import gettext as _
 
 from .models import Product, WorkSchedule
+from .tasks import enter_log
 
 
 class IndexTemplateView(TemplateView):
     template_name = 'main/index.html'
+
+    def get(self, request, *args, **kwargs):
+        response = super().get(request, *args, **kwargs)
+        enter_log.delay(f'{request.user}')
+        return response
 
 
 class AboutTemplateView(TemplateView):

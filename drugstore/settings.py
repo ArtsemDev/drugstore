@@ -19,12 +19,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+# SECRET_KEY = os.getenv('SECRET_KEY')
 SECRET_KEY = 'django-insecure-jh_x#q8%**1l4qtxj^=h(r9(89m&968rlk$exn5jn=t+@g+o!0'
-
+# 'django-insecure-jh_x#q8%**1l4qtxj^=h(r9(89m&968rlk$exn5jn=t+@g+o!0'
 # SECURITY WARNING: don't run with debug turned on in production!
+# DEBUG = int(os.getenv('DEBUG', 0))
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS').split()
+ALLOWED_HOSTS = ['0.0.0.0']
 
 LOGIN_REDIRECT_URL = 'profile'
 LOGOUT_REDIRECT_URL = 'signin'
@@ -81,10 +84,15 @@ WSGI_APPLICATION = 'drugstore.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('PG_NAME'),
+        'USER': os.getenv('PG_USER'),
+        'PASSWORD': os.getenv('PG_PASSWORD'),
+        'HOST': os.getenv('PG_HOST'),
+        'PORT': os.getenv('PG_PORT')
     }
 }
+
 
 # RestFramework settings
 REST_FRAMEWORK = {
@@ -139,8 +147,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.SmallAutoField'
 TOKEN_EXPIRE = 2
 
 
-REDIS_HOST = '0.0.0.0'
-REDIS_PORT = '6379'
+REDIS_HOST = os.getenv('REDIS_HOST')
+REDIS_PORT = os.getenv('REDIS_PORT')
 CELERY_BROKER_URL = f'redis://{REDIS_HOST}:{REDIS_PORT}/0'
 CELERY_RESULT_BACKEND = f'redis://{REDIS_HOST}:{REDIS_PORT}/0'
 CELERY_BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}
